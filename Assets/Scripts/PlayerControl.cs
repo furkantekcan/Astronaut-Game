@@ -5,8 +5,15 @@ using UnityEngine;
 public class PlayerControl : MonoBehaviour
 {
     Rigidbody2D playerRB;
-    public float movespeed = 1f;
+    Animator playerAnim;
+    public float moveSpeed = 1f;
+    public float jumpSpeed = 1f;
     bool facingRight = true;
+    public bool isGrounded = false;
+
+    public Transform groundPosition;
+    public float groundedCheckRadius;
+    public LayerMask groundLayer;
     void Awake() 
     {
         
@@ -14,13 +21,15 @@ public class PlayerControl : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        playerRB = GetComponent<Rigidbody2D>();
+        playerRB = GetComponent<Rigidbody2D>(); 
+        playerAnim = GetComponent<Animator>();
     }
 
     // Update is called once per frame
     void Update()
     {
         HorizontalMove();
+        OnGroundCheck();
 
         if(playerRB.velocity.x < 0 && facingRight)
         {
@@ -29,6 +38,10 @@ public class PlayerControl : MonoBehaviour
         else if (playerRB.velocity.x > 0 && !facingRight)
         {
             FlipFace();
+        }
+        else if (Input.GetAxis("Vertical") > 0 && isGrounded)
+        {
+            Jump();
         }
     }
     
@@ -39,7 +52,8 @@ public class PlayerControl : MonoBehaviour
 
     void HorizontalMove()
     {
-        playerRB.velocity = new Vector2(Input.GetAxis("Horizontal") * movespeed, playerRB.velocity.y);
+        playerAnim.SetFloat("playerSpeed", Mathf.Abs(playerRB.velocity.x)); 
+        playerRB.velocity = new Vector2(Input.GetAxis("Horizontal") * moveSpeed, playerRB.velocity.y);
     }
 
     void FlipFace()
@@ -48,5 +62,15 @@ public class PlayerControl : MonoBehaviour
         Vector3 tempLocalScale = transform.localScale;
         tempLocalScale.x *= -1;
         transform.localScale = tempLocalScale;
+    }
+
+    void Jump()
+    {
+        playerRB.AddForce(new Vector2(0f, jumpSpeed));
+    }
+
+    void OnGroundCheck()
+    {
+        isGrounded = Physics2D.OverlapCircle(groundPosition.position, groundedCheckRadius, groundLayer);
     }
 }
