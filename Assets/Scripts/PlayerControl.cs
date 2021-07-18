@@ -7,7 +7,7 @@ public class PlayerControl : MonoBehaviour
     Rigidbody2D playerRB;
     Animator playerAnim;
     public float moveSpeed = 1f;
-    public float jumpSpeed = 1f;
+    public float jumpSpeed = 1f, jumpFrequency = 1f, nextJumpTime;
     bool facingRight = true;
     public bool isGrounded = false;
 
@@ -39,8 +39,9 @@ public class PlayerControl : MonoBehaviour
         {
             FlipFace();
         }
-        else if (Input.GetAxis("Vertical") > 0 && isGrounded)
+        else if (Input.GetAxis("Vertical") > 0 && isGrounded && (nextJumpTime < Time.timeSinceLevelLoad))
         {
+            nextJumpTime = Time.timeSinceLevelLoad + jumpFrequency;
             Jump();
         }
     }

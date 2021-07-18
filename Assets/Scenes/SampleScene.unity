@@ -268,7 +268,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 4
-  jumpSpeed: 20
+  jumpSpeed: 300
+  jumpFrequency: 0.05
+  nextJumpTime: 0
   isGrounded: 0
   groundPosition: {fileID: 1527233643}
   groundedCheckRadius: 0.1
