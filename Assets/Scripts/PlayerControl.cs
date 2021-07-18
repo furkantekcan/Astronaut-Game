@@ -52,9 +52,9 @@ public class PlayerControl : MonoBehaviour
     }
 
     void HorizontalMove()
-    {
-        playerAnim.SetFloat("playerSpeed", Mathf.Abs(playerRB.velocity.x)); 
+    { 
         playerRB.velocity = new Vector2(Input.GetAxis("Horizontal") * moveSpeed, playerRB.velocity.y);
+        playerAnim.SetFloat("playerSpeed", Mathf.Abs(playerRB.velocity.x));
     }
 
     void FlipFace()
@@ -73,5 +73,6 @@ public class PlayerControl : MonoBehaviour
     void OnGroundCheck()
     {
         isGrounded = Physics2D.OverlapCircle(groundPosition.position, groundedCheckRadius, groundLayer);
+        playerAnim.SetBool("isGroundedAnim", isGrounded);
     }
 }
