@@ -72,7 +72,8 @@ public class PlayerControl : MonoBehaviour
 
     void OnGroundCheck()
     {
-        isGrounded = Physics2D.OverlapCircle(groundPosition.position, groundedCheckRadius, groundLayer);
+        //isGrounded = Physics2D.OverlapCircle(groundPosition.position, groundedCheckRadius, groundLayer);
+        isGrounded = Physics2D.OverlapBox(groundPosition.position, new Vector2(2.4f, 0.1f),0,groundLayer);
         playerAnim.SetBool("isGroundedAnim", isGrounded);
     }
 }
