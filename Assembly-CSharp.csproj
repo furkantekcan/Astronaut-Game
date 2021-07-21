@@ -39,6 +39,7 @@
      <Compile Include="Assets\Scripts\CameraManager.cs" />
      <Compile Include="Assets\Scripts\EnemyManager.cs" />
      <Compile Include="Assets\Scripts\PlayerControl.cs" />
+     <Compile Include="Assets\Scripts\PlayerManager.cs" />
     <Reference Include="UnityEngine">
         <HintPath>/home/ace/Documents/Unity/2019.4.21f1/Editor/Data/Managed/UnityEngine/UnityEngine.dll</HintPath>
     </Reference>
