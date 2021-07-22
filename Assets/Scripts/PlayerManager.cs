@@ -9,6 +9,8 @@ public class PlayerManager : MonoBehaviour
 
     Transform muzzle;
     public Transform bullet;
+    public float bulletSpeed;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -49,6 +51,8 @@ public class PlayerManager : MonoBehaviour
 
     void ShootBullet()
     {
-        Instantiate(bullet,muzzle.position,Quaternion.identity);
+        Transform tempBullet;
+        tempBullet = Instantiate(bullet,muzzle.position,Quaternion.identity);
+        tempBullet.GetComponent<Rigidbody2D>().AddForce(muzzle.forward * bulletSpeed);
     }
 }

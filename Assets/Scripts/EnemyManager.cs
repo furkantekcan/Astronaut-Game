@@ -27,6 +27,11 @@ public class EnemyManager : MonoBehaviour
             colliderBusiy = true;
             other.GetComponent<PlayerManager>().GetDamage(damage);
         }
+        else if (other.tag == "Bullet")
+        {
+            GetDamage(other.GetComponent<BulletManager>().bulletDamage);
+            Destroy(other.gameObject);
+        }
     }
 
     private void OnTriggerExit2D(Collider2D other) {
@@ -35,6 +40,29 @@ public class EnemyManager : MonoBehaviour
             colliderBusiy = false;
         }
     }
+
+    public void GetDamage(float damage)
+    {
+        if (health - damage >= 0)
+        {
+            health -= damage;
+        }
+
+        else
+        {
+            health = 0;
+        }
+        
+        IsDead();
+    }
+
+    public void IsDead()
+    {
+        if(health <= 0)
+        {
+            Destroy(gameObject);
+        }
+    }    
 
     // private void OnTriggerStay2D(Collider2D other) {
         
