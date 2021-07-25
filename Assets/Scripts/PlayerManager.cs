@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class PlayerManager : MonoBehaviour
 {
@@ -33,7 +34,7 @@ public class PlayerManager : MonoBehaviour
 
     public void GetDamage(float damage)
     {
-        Instantiate(floatingText, transform.position, Quaternion.identity).GetComponent<TextMesh>().text = damage.ToString();
+        Instantiate(floatingText, transform.position, Quaternion.identity).GetComponent<TextMeshProUGUI>().text = damage.ToString();
         if (health - damage >= 0)
         {
             health -= damage;
